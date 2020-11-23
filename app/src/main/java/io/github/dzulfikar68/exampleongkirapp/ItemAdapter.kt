@@ -5,9 +5,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import java.text.NumberFormat
+import java.util.*
 
 class ItemAdapter(
-        private val name: String,
+        private val name: String?,
         private val items: List<CostsItem>
 ) : RecyclerView.Adapter<ItemAdapter.ViewHolder>() {
 
@@ -20,13 +22,26 @@ class ItemAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = items[position]
-        holder.tvName?.text = name
-        holder.tvService?.text = item.service
-        holder.tvDescription?.text = item.description
-        val cost = item.cost?.let { if (it.isNullOrEmpty()) "Rp. ${it[0].value.toString()}" else "-" }
-        holder.tvCost?.text = cost
-        val duration = item.cost?.let { if (it.isNullOrEmpty()) "${it[0].etd} Hari" else "-" }
-        holder.tvDuration?.text = duration
+        holder.tvName?.text = name ?: "-"
+        holder.tvService?.text = item.service.let { if (!it.isNullOrEmpty()) "[${it}]" else "-" }
+        holder.tvDescription?.text = item.description ?: "-"
+        holder.tvCost?.text = item.cost.let { if (!it.isNullOrEmpty()) it[0].value?.toCurrency() else "-" }
+        holder.tvDuration?.text = item.cost.let { if (!it.isNullOrEmpty()) findAndPrintHari(it[0].etd) else "-" }
+    }
+
+    private fun findAndPrintHari(text: String?): String {
+        val containHari = text?.toLowerCase(Locale.ROOT)?.contains("hari")
+        return if (containHari == true) {
+            text
+        } else {
+            "${text} Hari"
+        }
+    }
+
+    fun Int.toCurrency(): String {
+        val localeID = Locale("in", "ID")
+        val formatRupiah: NumberFormat = NumberFormat.getCurrencyInstance(localeID)
+        return formatRupiah.format(this)
     }
 
     inner class ViewHolder(row: View) : RecyclerView.ViewHolder(row) {

@@ -1,5 +1,7 @@
 package io.github.dzulfikar68.exampleongkirapp
 
+// Main Response
+
 data class RajaOngkirResponse<T>(
 		val rajaongkir: T? = null
 )
@@ -8,23 +10,22 @@ data class ResultList<T>(
 		val results: List<T>? = null
 )
 
-data class ProvinceItem(
-		val province: String? = null,
-		val province_id: String? = null
-)
+// City Response
 
 data class CityItem(
+		val city_id: String? = null,
 		val city_name: String? = null,
-		val province: String? = null,
-		val province_id: String? = null,
 		val type: String? = null,
 		val postal_code: String? = null,
-		val city_id: String? = null
+		val province_id: String? = null,
+		val province: String? = null
 ) {
 	override fun toString(): String {
 		return city_name ?: "-"
 	}
 }
+
+// Ongkir Response
 
 data class OngkirItem(
 		val costs: List<CostsItem>? = null,

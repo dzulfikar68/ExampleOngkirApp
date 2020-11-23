@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginHorizontal="20dp"
-    android:layout_marginVertical="5dp"
+    android:layout_marginVertical="10dp"
     android:clickable="true"
     android:focusable="true"
     android:foreground="?android:attr/selectableItemBackground"
@@ -54,6 +54,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
+                    android:textStyle="italic"
                     android:text="Description" />
 
             </LinearLayout>
@@ -81,6 +82,7 @@
 
                 <TextView
                     android:id="@+id/tvDuration"
+                    android:textStyle="italic"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"

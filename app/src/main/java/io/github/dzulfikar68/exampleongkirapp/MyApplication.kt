@@ -4,7 +4,7 @@ import android.app.Application
 import org.koin.core.context.startKoin
 import org.koin.dsl.module
 
-class MyApp : Application() {
+class MyApplication : Application() {
     override fun onCreate() {
         super.onCreate()
 
