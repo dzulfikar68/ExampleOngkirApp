@@ -7,12 +7,11 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class RetrofitTanpaDI {
     private fun getInterceptor(): OkHttpClient {
-        val logging = HttpLoggingInterceptor()
-        logging.level = HttpLoggingInterceptor.Level.BODY
-        val okHttpClient = OkHttpClient.Builder()
-                .addInterceptor(logging)
+        val interceptor = HttpLoggingInterceptor()
+        interceptor.level = HttpLoggingInterceptor.Level.BODY
+        return OkHttpClient.Builder()
+                .addInterceptor(interceptor)
                 .build()
-        return okHttpClient
     }
 
     private fun getRetrofit(): Retrofit {

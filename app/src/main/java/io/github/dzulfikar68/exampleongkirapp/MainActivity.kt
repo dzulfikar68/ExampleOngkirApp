@@ -13,14 +13,19 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.textfield.MaterialAutoCompleteTextView
 import kotlinx.android.synthetic.main.activity_main.*
+import org.koin.core.KoinComponent
+import org.koin.core.get
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), KoinComponent {
 
-    private var retrofitServices: RajaOngkirServices? = null
+    // init retrofit tanpa dependency injection
+//    private var retrofitServices: RajaOngkirServices? = null
+    // init retrofit dengan dependency injection
+    private var retrofitServices = get<RajaOngkirServices?>()
     private var dialog: ProgressDialog? = null
     private var cityOrigin: CityItem? = null
     private var cityDestination: CityItem? = null
@@ -32,11 +37,11 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         supportActionBar?.title = "Cek Ongkir Kuy!"
 
-        // init retrofit tanpa dependency injection
-        retrofitServices = RetrofitTanpaDI().getService()
+        // assign retrofit tanpa dependency injection
+//        retrofitServices = RetrofitTanpaDI().getService()
 
-        // init retrofit dengan dependency injection
-        //TODO
+        // assign retrofit dengan dependency injection
+//
 
         // init data / get city
         dialog = ProgressDialog.show(this, "",
@@ -77,12 +82,6 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
-    }
-
-    override fun onPause() {
-        super.onPause()
-        if (dialog != null && dialog?.isShowing() == true) dialog?.dismiss()
-        dialog = null
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
