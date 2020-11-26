@@ -6,7 +6,7 @@
         android:id="@+id/ic_sync"
         android:icon="@drawable/ic_baseline_sync_24"
         android:orderInCategory="0"
-        android:title="Text to be seen by user"
+        android:title="Sync Ongkir"
         app:showAsAction="always" />
 
 </menu>

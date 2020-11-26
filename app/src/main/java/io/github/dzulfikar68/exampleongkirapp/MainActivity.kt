@@ -106,7 +106,7 @@ class MainActivity : AppCompatActivity(), KoinComponent {
                     tipeEkspedisi = tipeEkspedisi
             )?.enqueue(object : Callback<RajaOngkirResponse<ResultList<OngkirItem>?>?> {
                 override fun onFailure(call: Call<RajaOngkirResponse<ResultList<OngkirItem>?>?>, t: Throwable) {
-                    pbLoading?.visibility = View.GONE
+                    finishingRequestCost(null)
                     Toast.makeText(this@MainActivity, t.localizedMessage, Toast.LENGTH_LONG).show()
                 }
 
@@ -116,15 +116,19 @@ class MainActivity : AppCompatActivity(), KoinComponent {
                             result?.name,
                             result?.costs
                     )
-                    if (result?.costs?.isNullOrEmpty() == true)
-                        tvEmpty?.visibility = View.VISIBLE
-                    else
-                        tvEmpty?.visibility = View.GONE
-                    pbLoading?.visibility = View.GONE
+                    finishingRequestCost(result?.costs)
                 }
             })
             true
         } else super.onOptionsItemSelected(item)
+    }
+
+    private fun finishingRequestCost(list: List<CostsItem>?) {
+        if (list?.isNullOrEmpty() == true)
+            tvEmpty?.visibility = View.VISIBLE
+        else
+            tvEmpty?.visibility = View.GONE
+        pbLoading?.visibility = View.GONE
     }
 
     private fun RecyclerView.setListItem(name: String?, items: List<CostsItem>?) {

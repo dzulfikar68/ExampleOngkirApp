@@ -21,7 +21,7 @@ data class CityItem(
 		val province: String? = null
 ) {
 	override fun toString(): String {
-		return city_name ?: "-"
+		return "$type $city_name"
 	}
 }
 
