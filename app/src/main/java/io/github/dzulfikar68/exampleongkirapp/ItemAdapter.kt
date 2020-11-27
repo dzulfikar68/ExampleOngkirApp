@@ -38,7 +38,7 @@ class ItemAdapter(
         }
     }
 
-    fun Int.toCurrency(): String {
+    private fun Int.toCurrency(): String {
         val localeID = Locale("in", "ID")
         val formatRupiah: NumberFormat = NumberFormat.getCurrencyInstance(localeID)
         return formatRupiah.format(this)

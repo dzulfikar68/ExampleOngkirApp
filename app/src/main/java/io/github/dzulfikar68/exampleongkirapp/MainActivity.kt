@@ -30,7 +30,7 @@ class MainActivity : AppCompatActivity(), KoinComponent {
     private var cityOrigin: CityItem? = null
     private var cityDestination: CityItem? = null
     private var beratBarang: String? = null
-    private var tipeEkspedisi: String? = null
+    private var tipeEkspedisi: String = "pos"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
